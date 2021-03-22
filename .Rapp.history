@@ -1,0 +1,6 @@
+~/Downloads/hw4/week3Rclass.csv
+data.test<-read.csv('~/Downloads/hw4/week3Rclass.csv',header=TRUE)
+head(data.test)
+cute_cute
+cute_cute<-read.csv('~/Downloads/hw4/week3Rclass.csv',header=TRUE)
+cute_cute
