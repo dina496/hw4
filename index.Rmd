@@ -1,5 +1,5 @@
 ---
-author: "未命名 B01201001 一般系"
+author: "賴迎曦 B09303065 經濟系"
 title: "HW 4: List, Loop, and Data frame"
 date: | 
   | 2021-03-18
@@ -42,7 +42,7 @@ df
 
 ```{r}
 # Write your code here
-
+subset(df, supp == "VC")[ ,1:2]
 # should print out:
 #> # A tibble: 30 x 2
 #>      len supp 
@@ -67,7 +67,7 @@ df
 
 ```{r}
 # Write your code here
-
+subset(df, supp == "VC" & len < 25)
 # should print out:
 #> # A tibble: 24 x 3
 #>      len supp   dose
@@ -92,7 +92,7 @@ df
 
 ```{r}
 # Write your code here
-
+subset(df, (len + 15 * dose) > 40)
 # should print out:
 #> # A tibble: 24 x 3
 #>      len supp   dose
@@ -126,7 +126,9 @@ df
 1. 修改 list 裡面元素的語法與 vector 類似：
   
     ```{r}
-    lst <- list(list(first = "Tiger"))
+    lst <- list(
+      list(first = "Tiger")
+    )
     lst
     
     lst[[1]]$first <- "Pooh"
@@ -148,8 +150,11 @@ member <- list(
 
 n_years_later <- function(member_data, years) {
   # Write your code here
+  for (i in seq_along(member_data)) {
+    member_data[[i]]$age <- member_data[[i]]$age + years
+  }
+  as.list(member_data)
 }
-
 
 ##### Do Not modify the code below #####
 member[[5]] <- list(name = "Obama", age = 59)
@@ -171,7 +176,9 @@ for (y in -1:1) {
    
 ```{r}
 # Write your code here
-
+library(readr)
+week3Rclass <- read_csv("~/Downloads/hw4/week3Rclass.csv")
+cute_cute <- data.frame(week3Rclass)
 # Do not modify the code below
 cute_cute
 # Should print out
@@ -210,8 +217,24 @@ Q_Q = data.frame(
 ####### Do Not modify the code above #########
 
 # Write your code here
-
-
+for (i in seq_along(Q_Q$GPA)) {
+  if (Q_Q$GPA[[i]] > 4.3) {
+    Q_Q$GPA[[i]] <- NA
+  } else {
+    next
+  }
+}
+gender.level <- levels(Q_Q$gender)
+levels(Q_Q$gender) <- c(gender.level,0,1,2)
+for (i in seq_along(Q_Q$gender)) {
+  if (Q_Q$gender[i] == "M") {
+    Q_Q$gender[i] <- 1
+  } else if (Q_Q$gender[i] == "F") {
+    Q_Q$gender[i] <- 2
+  } else {
+    Q_Q$gender[i] <- 0
+  }
+}
 # Do Not modify the code below
 Q_Q
 # Should print out
@@ -232,7 +255,13 @@ Q_Q
   
 ```{r}
 # Write your code here
-
+for (i in seq_along(cute_cute$q_self)) {
+  if (cute_cute$q_self[[i]] >= 70) {
+    cute_cute$"favorite_word"[[i]] <- "根本可愛動物區"
+  } else {
+    cute_cute$"favorite_word"[[i]] <- "一代一代"
+  }
+}
 # Do not modify the code below
 cute_cute
 # Should print out
